@@ -7,11 +7,14 @@ from rest_framework import status
 from rest_framework.authtoken.models import Token
 from django.contrib.auth.models import User
 from rest_framework.authentication import TokenAuthentication
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated,AllowAny
 
 # Create your views here.
 
 class UserRegisteration(APIView):
+    # This view has to be accessed by any one to register themselve
+    permission_classes = [AllowAny]
+
     def post(self,request):
         serializer = UserSerializer(data=request.data)
         
@@ -19,13 +22,12 @@ class UserRegisteration(APIView):
             serializer.save()
 
             user = User.objects.get(username=serializer.data['username'])
-            token_obj , created = Token.objects.get_or_create(user=user)
+            token_obj , _ = Token.objects.get_or_create(user=user)
 
             return Response({"data" : serializer.data,"token" : str(token_obj)}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class TodoList(APIView):
-
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
 
@@ -43,7 +45,6 @@ class TodoList(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
 class TodoDetail(APIView):
-
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
 
@@ -60,6 +61,7 @@ class TodoDetail(APIView):
 
     def put(self, request, pk, format=None):
         tdata = self.get_object(pk)
+        print(tdata)
         serializer = TodoSerializer(tdata, data=request.data)
         if serializer.is_valid():
             serializer.save()
