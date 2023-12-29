@@ -1,5 +1,5 @@
 from .models import todo
-from .serializer import TodoSerializer,UserSerializer
+from .serializer import TodoSerializer, UserSerializer
 from django.http import Http404
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -7,42 +7,48 @@ from rest_framework import status
 from rest_framework.authtoken.models import Token
 from django.contrib.auth.models import User
 from rest_framework.authentication import TokenAuthentication
-from rest_framework.permissions import IsAuthenticated,AllowAny
+from rest_framework.permissions import IsAuthenticated, AllowAny
 
 # Create your views here.
+
 
 class UserRegisteration(APIView):
     # This view has to be accessed by any one to register themselve
     permission_classes = [AllowAny]
 
-    def post(self,request):
+    def post(self, request):
         serializer = UserSerializer(data=request.data)
-        
+
         if serializer.is_valid():
             serializer.save()
-            
-            user = User.objects.get(username=serializer.data['username'])
-            token_obj , _ = Token.objects.get_or_create(user=user)
-            return Response({"data" : serializer.data,"token" : str(token_obj)}, status=status.HTTP_201_CREATED)
+
+            user = User.objects.get(username=serializer.data["username"])
+            token_obj, _ = Token.objects.get_or_create(user=user)
+            return Response(
+                {"data": serializer.data, "token": str(token_obj)},
+                status=status.HTTP_201_CREATED,
+            )
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 class TodoList(APIView):
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
 
-    def get(self,request,format=None):
+    def get(self, request, format=None):
         tdata = todo.objects.all()
-        serialised = TodoSerializer(tdata,many=True)
+        serialised = TodoSerializer(tdata, many=True)
         return Response(serialised.data)
-    
-    def post(self,request,format=None):
+
+    def post(self, request, format=None):
         serializer = TodoSerializer(data=request.data)
-        
+
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
+
+
 class TodoDetail(APIView):
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]

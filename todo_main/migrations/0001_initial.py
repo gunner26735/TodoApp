@@ -5,37 +5,65 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='tag',
+            name="tag",
             fields=[
-                ('t_id', models.AutoField(primary_key=True, serialize=False)),
-                ('t_title', models.CharField(max_length=20, unique=True)),
+                ("t_id", models.AutoField(primary_key=True, serialize=False)),
+                ("t_title", models.CharField(max_length=20, unique=True)),
             ],
         ),
         migrations.CreateModel(
-            name='todo',
+            name="todo",
             fields=[
-                ('id', models.AutoField(primary_key=True, serialize=False)),
-                ('timestamp', models.DateField(auto_now_add=True)),
-                ('title', models.CharField(max_length=100)),
-                ('description', models.TextField(max_length=1000)),
-                ('due_date', models.DateField(blank=True, null=True)),
-                ('status', models.CharField(choices=[('OPEN', 'open'), ('WORKING', 'working'), ('DONE', 'done'), ('OVERDUE', 'overdue')], default='OPEN', max_length=10)),
+                ("id", models.AutoField(primary_key=True, serialize=False)),
+                ("timestamp", models.DateField(auto_now_add=True)),
+                ("title", models.CharField(max_length=100)),
+                ("description", models.TextField(max_length=1000)),
+                ("due_date", models.DateField(blank=True, null=True)),
+                (
+                    "status",
+                    models.CharField(
+                        choices=[
+                            ("OPEN", "open"),
+                            ("WORKING", "working"),
+                            ("DONE", "done"),
+                            ("OVERDUE", "overdue"),
+                        ],
+                        default="OPEN",
+                        max_length=10,
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='todo_tags',
+            name="todo_tags",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('tag_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='todo_main.tag')),
-                ('todo_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='todo_main.todo')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "tag_id",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="todo_main.tag"
+                    ),
+                ),
+                (
+                    "todo_id",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="todo_main.todo"
+                    ),
+                ),
             ],
         ),
     ]
