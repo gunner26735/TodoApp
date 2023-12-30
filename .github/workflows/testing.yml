@@ -50,7 +50,7 @@ jobs:
       run: |
         pip install black
         black .
-    -name: Make Migrations
+    - name: Make Migrations
       run: |
         python manage.py makemigrations
         python manage.py migrate
