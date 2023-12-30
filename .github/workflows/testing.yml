@@ -25,6 +25,8 @@ jobs:
       uses: actions/setup-python@v3
       with:
         python-version: 3.11.2
+    - name : Install maria depenencies
+      run : sudo apt-get install python3-dev default-libmysqlclient-dev build-essential pkg-config
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
