@@ -20,16 +20,17 @@ jobs:
     runs-on: ubuntu-latest
 
     services:
-      mariadb:
-        image: mariadb:10.11.4
+      postgres:
+        image: postgres:15.5
         env:
-          MYSQL_USER: demo
-          MYSQL_PASSWORD: demo123
-          MYSQL_DATABASE: git_actions
-          MYSQL_ROOT_PASSWORD: Test@123
+          POSTGRES_USER: demo
+          POSTGRES_PASSWORD: demo123
+          POSTGRES_DB: git_actions
+
         ports:
-          - 3306
-        options: --health-cmd="mysqladmin ping" --health-interval=5s --health-timeout=2s --health-retries=3 
+          - 5432
+          
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
 
     steps:
     - uses: actions/checkout@v3
@@ -37,8 +38,6 @@ jobs:
       uses: actions/setup-python@v3
       with:
         python-version: 3.11.2
-    - name : Install maria depenencies
-      run : sudo apt-get install python3-dev libmariadb3 libmariadb-dev build-essential pkg-config
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
