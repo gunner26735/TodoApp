@@ -51,11 +51,6 @@ jobs:
       run: |
         pip install black
         black .
-    # - name: Coverage report
-    #   run: |
-    #     pip install coverage
-    #     coverage run manage.py test
-    #     coverage report
     - name: Django Testing
     env:
         DB_ENGINE : ${{ secrets.DB_ENGINE }}
