@@ -19,16 +19,6 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    services:
-      mariadb:
-        image: mariadb:latest
-        env:
-          MYSQL_ROOT_PASSWORD: root
-          MYSQL_DATABASE: test
-        ports:
-          - 3306:3306
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
-
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python 3.11.2
@@ -56,4 +46,4 @@ jobs:
         coverage report
     - name: Django Testing
       run: |
-        python manage.py test
+        python3 manage.py test
