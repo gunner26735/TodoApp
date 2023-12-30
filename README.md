@@ -54,3 +54,9 @@ This is a Django project that demonstrates how to create a web application using
     ```bash
     deactivate
     ```
+
+## Coverage Report Screenshots
+![Screenshot from 2023-12-30 19-45-51](https://github.com/gunner26735/TodoApp/assets/61881540/8cc5af43-61b8-4969-8ba8-24606c51bb08)
+![Screenshot from 2023-12-30 19-46-13](https://github.com/gunner26735/TodoApp/assets/61881540/88bdcd0c-5c92-491f-aaab-dd71929de75d)
+
+
