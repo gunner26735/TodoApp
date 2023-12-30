@@ -51,7 +51,7 @@ jobs:
         pip install black
         black .
     -name: Make Migrations
-      -run: |
+      run: |
         python manage.py makemigrations
         python manage.py migrate
     - name: Coverage report
