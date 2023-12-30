@@ -19,6 +19,18 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    services:
+      mariadb:
+        image: mariadb:10.11.4
+        env:
+          MYSQL_USER: demo
+          MYSQL_PASSWORD: demo123
+          MYSQL_DATABASE: git_actions
+          MYSQL_ROOT_PASSWORD: Test@123
+        ports:
+          - 3306
+        options: --health-cmd="mysqladmin ping" --health-interval=5s --health-timeout=2s --health-retries=3 
+
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python 3.11.2
@@ -40,6 +52,13 @@ jobs:
         pip install black
         black .
     - name: Coverage report
+      env:
+        DB_ENGINE : ${{ secrets.DB_ENGINE }}
+        DB_NAME : ${{ secrets.DB_NAME }}
+        DB_USER : ${{ secrets.DB_USER }}
+        DB_PASSWORD : ${{ secrets.DB_PASSWORD }}
+        DB_HOST : ${{ secrets.DB_HOST }}
+        DB_PORT : ${{ secrets.DB_PORT }}
       run: |
         pip install coverage
         coverage run manage.py test
