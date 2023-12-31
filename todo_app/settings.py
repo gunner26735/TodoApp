@@ -26,7 +26,7 @@ SECRET_KEY = "django-insecure-b6k#*v1!341%df_h44ag+d*e2wu-k!dd5+7%)bg(u%mbcw0s@1
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1','*','.vercel.app']
+ALLOWED_HOSTS = ["127.0.0.1", "*", ".vercel.app"]
 
 # Token Authentication dependencies
 REST_FRAMEWORK = {
@@ -89,13 +89,13 @@ WSGI_APPLICATION = "todo_app.wsgi.application"
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': "postgres",
-        'USER': "postgres",
-        'PASSWORD': "f9J&T_hCK77DNkj",
-        'HOST': "db.jaznredmzkmyjwilafuo.supabase.co",
-        'PORT': 5432,
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "postgres",
+        "USER": "postgres",
+        "PASSWORD": "f9J&T_hCK77DNkj",
+        "HOST": "db.jaznredmzkmyjwilafuo.supabase.co",
+        "PORT": 5432,
     }
 }
 
@@ -135,9 +135,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = "static/"
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
-MEDIA_URLS ='/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles_build", "static")
+MEDIA_URLS = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
