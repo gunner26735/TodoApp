@@ -88,13 +88,13 @@ WSGI_APPLICATION = "todo_app.wsgi.application"
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "todo",
-        "USER": "sid",
-        "PASSWORD": "sid123",
-        "HOST": "localhost",
-        "PORT": "5432",
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': "postgres",
+        'USER': "postgres",
+        'PASSWORD': "f9J&T_hCK77DNkj",
+        'HOST': "db.jaznredmzkmyjwilafuo.supabase.co",
+        'PORT': 5432,
     }
 }
 
