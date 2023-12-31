@@ -12,6 +12,10 @@ from rest_framework.permissions import IsAuthenticated, AllowAny
 # Create your views here.
 
 
+class Home(APIView):
+    def get(self,request):
+        return Response({"message":"Please use Post man to interact or admin panel..."},status=status.HTTP_200_OK)
+
 class UserRegisteration(APIView):
     # This view has to be accessed by any one to register themselve
     permission_classes = [AllowAny]
