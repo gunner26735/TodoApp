@@ -18,19 +18,19 @@ class UserSerializer(serializers.ModelSerializer):
 
 class TagSerializer(serializers.ModelSerializer):
     class Meta:
-        fields = "__all__"
+        fields = ('t_id','t_title')
         model = models.tag
 
 
 class TodoTagSerializer(serializers.ModelSerializer):
+    tag = serializers.StringRelatedField(many=True,read_only=True)
     class Meta:
-        fields = "__all__"
+        fields = ('todo_id','tag_id','tag')
         model = models.todo_tags
 
 
 class TodoSerializer(serializers.ModelSerializer):
-    tags = TagSerializer(read_only=True, many=True)
-    todo_tags = TodoTagSerializer(read_only=True, many=True)
+    tags = TodoTagSerializer(many=True,read_only=True)
 
     class Meta:
         fields = (
@@ -40,7 +40,7 @@ class TodoSerializer(serializers.ModelSerializer):
             "description",
             "due_date",
             "status",
-            "tags",
-            "todo_tags",
+            'tags',
+            'todo',
         )
         model = models.todo

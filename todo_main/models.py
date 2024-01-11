@@ -27,7 +27,10 @@ class tag(models.Model):
     t_id = models.AutoField(primary_key=True)
     t_title = models.CharField(max_length=20, unique=True)
 
+    def __str__(self) -> str:
+        return self.t_title
+
 
 class todo_tags(models.Model):
-    todo_id = models.ForeignKey(todo, on_delete=models.CASCADE)
-    tag_id = models.ForeignKey(tag, on_delete=models.CASCADE)
+    todo_id = models.ForeignKey(todo, on_delete=models.CASCADE, related_name='todo')
+    tag_id = models.ForeignKey(tag, on_delete=models.CASCADE, related_name='tags')
