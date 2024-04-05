@@ -3,6 +3,7 @@ black==23.12.1
 click==8.1.7
 coverage==7.4.0
 Django==4.2.7
+django-taggit==5.0.1
 djangorestframework==3.14.0
 flake8==6.1.0
 mccabe==0.7.0
