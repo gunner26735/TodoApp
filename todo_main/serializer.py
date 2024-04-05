@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from . import models
 from django.contrib.auth.models import User
+from taggit.serializers import TagListSerializerField, TaggitSerializer
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -16,21 +17,8 @@ class UserSerializer(serializers.ModelSerializer):
         return user
 
 
-class TagSerializer(serializers.ModelSerializer):
-    class Meta:
-        fields = ('t_id','t_title')
-        model = models.tag
-
-
-class TodoTagSerializer(serializers.ModelSerializer):
-    tag = serializers.StringRelatedField(many=True,read_only=True)
-    class Meta:
-        fields = ('todo_id','tag_id','tag')
-        model = models.todo_tags
-
-
-class TodoSerializer(serializers.ModelSerializer):
-    tags = TodoTagSerializer(many=True,read_only=True)
+class TodoSerializer(TaggitSerializer, serializers.ModelSerializer):
+    tags = TagListSerializerField()
 
     class Meta:
         fields = (
@@ -40,7 +28,6 @@ class TodoSerializer(serializers.ModelSerializer):
             "description",
             "due_date",
             "status",
-            'tags',
-            'todo',
+            "tags",
         )
         model = models.todo

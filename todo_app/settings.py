@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-b6k#*v1!341%df_h44ag+d*e2wu-k!dd5+7%)bg(u%mbcw0s@1"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["127.0.0.1", "*", ".vercel.app"]
 
@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "rest_framework.authtoken",
     "todo_main",
+    "taggit",
 ]
 
 MIDDLEWARE = [
@@ -91,11 +92,11 @@ WSGI_APPLICATION = "todo_app.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "postgres",
-        "USER": "postgres",
-        "PASSWORD": "f9J&T_hCK77DNkj",
-        "HOST": "db.jaznredmzkmyjwilafuo.supabase.co",
-        "PORT": 5432,
+        "NAME": "todo",
+        "USER": "sid",
+        "PASSWORD": "sid123",
+        "HOST": "localhost",
+        "PORT": "5432",
     }
 }
 
@@ -136,8 +137,8 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles_build", "static")
-MEDIA_URLS = "/media/"
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+# MEDIA_URLS = "/media/"
+# MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field

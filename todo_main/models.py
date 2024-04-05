@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from taggit.managers import TaggableManager
 
 # Create your models here.
 
@@ -21,16 +22,17 @@ class todo(models.Model):
     status = models.CharField(
         max_length=10, choices=StatusChoice.choices, default=StatusChoice.OPEN
     )
+    tags = TaggableManager()
 
 
-class tag(models.Model):
-    t_id = models.AutoField(primary_key=True)
-    t_title = models.CharField(max_length=20, unique=True)
+# class tag(models.Model):
+#     t_id = models.AutoField(primary_key=True)
+#     t_title = models.CharField(max_length=20, unique=True)
 
-    def __str__(self) -> str:
-        return self.t_title
+#     def __str__(self) -> str:
+#         return self.t_title
 
 
-class todo_tags(models.Model):
-    todo_id = models.ForeignKey(todo, on_delete=models.CASCADE, related_name='todo')
-    tag_id = models.ForeignKey(tag, on_delete=models.CASCADE, related_name='tags')
+# class todo_tags(models.Model):
+#     todo_id = models.ForeignKey(todo, on_delete=models.CASCADE, related_name='todo')
+#     tag_id = models.ForeignKey(tag, on_delete=models.CASCADE, related_name='tags')
