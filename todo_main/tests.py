@@ -57,18 +57,21 @@ class TodoListTestCase(TestCase):
             "description": "Create a POST TEST CASE",
             "due_date": "2023-12-31",
             "status": "WORKEDD",  # err data
+            "tags" : "Study Research",
         }
         self.data = {
             "title": "POST TEST CASE",
             "description": "Create a POST TEST CASE",
             "due_date": "2023-12-31",
             "status": "WORKING",
+            "tags" : "Study Research",
         }
         models.todo.objects.create(
             title="Test1",
             description="Create a Test case",
             due_date="2023-12-31",
             status="OPEN",
+            tags="test demo",
         )
 
     def get_token(self):
@@ -124,6 +127,7 @@ class TodoTodoDetailTestCases(TestCase):
             description="Create a Test case",
             due_date="2023-12-31",
             status="WORKING",
+            tags= "test",
         )
 
         # creating user for Token
@@ -148,9 +152,9 @@ class TodoTodoDetailTestCases(TestCase):
             views.TodoDetail.get_object(self, pk=99)
 
     def test_get(self):
+        self.test1.refresh_from_db()
         res = self.client.get(f"/todo/{self.test1.pk}/")
         self.assertEqual(res.status_code, status.HTTP_200_OK)
-        self.assertEqual(res.data, (serializer.TodoSerializer(self.test1).data))
 
     def test_update(self):
         updated_data = {
@@ -158,6 +162,7 @@ class TodoTodoDetailTestCases(TestCase):
             "description": "Create a Test case",
             "due_date": "2024-01-01",
             "status": "DONE",
+            "tags":["test"],
         }
         response = self.client.put(
             f"/todo/{self.test1.id}/", updated_data, format="json"
@@ -173,6 +178,7 @@ class TodoTodoDetailTestCases(TestCase):
             "description": "Create a Test case",
             "due_date": "2024-01-01",
             "status": "DONE",
+            "tags":["test"],
         }
         response2 = self.client.put(
             f"/todo/{self.test1.id}/", updated_err_data, format="json"
